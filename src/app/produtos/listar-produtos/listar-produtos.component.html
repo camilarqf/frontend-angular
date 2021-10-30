@@ -1,0 +1,50 @@
+<mat-card>
+  <a href="produtos/cadastrar" class="botao" color="primary" mat-flat-button>
+    <mat-icon>add</mat-icon>
+  </a>
+  <mat-toolbar color="primary">
+    <span>Lista de Produtos</span>
+  </mat-toolbar>
+
+  <table mat-table [dataSource]="produtos" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Código Column -->
+    <ng-container matColumnDef="codigo">
+      <th mat-header-cell *matHeaderCellDef>Código</th>
+      <td mat-cell *matCellDef="let produto">{{ produto.codigo }}</td>
+    </ng-container>
+
+    <!-- Nome Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let produto">{{ produto.nome }}</td>
+    </ng-container>
+
+    <!-- Preço Column -->
+    <ng-container matColumnDef="preco">
+      <th mat-header-cell *matHeaderCellDef>Preço</th>
+      <td mat-cell *matCellDef="let produto">{{ produto.preco }}</td>
+    </ng-container>
+
+    <!-- Action Column-->
+    <ng-container matColumnDef="acao">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let produto">
+        <button (click)="produtoDetails(produto.codigo)" mat-icon-button color="accent">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button (click)="updateProduto(produto.codigo)" mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteProduto(produto.codigo)" mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</mat-card>
